@@ -9,18 +9,23 @@ def read_keys(fn='keys.txt'):
         lines = f.readlines()
 
     for i, line in enumerate(lines):
-        chcek = get_key(line)
-        if chcek != []:
-            name = lines[i-1]
-            key = line.split(' ')[2]
-            keys.append(key)
-            print(name, key)
+        ret = get_key(line)
+        if ret:
+            key = ret
+            name = lines[i-2]
+            
+            keys.append((name, key))
     return keys
 
 def get_key(line):
-    key = re.findall(r'(\w{5}-){2}\w{5}', line)
-    return key
-
+    if '-' in line:
+        split = line.split(' ')
+        key = split[-1]
+       
+        if key.count('-') == 2:
+            return key
+        else: 
+            return None
 
 def redeem(keys):
     # Init Steam client.
@@ -30,9 +35,9 @@ def redeem(keys):
     # Login to Steam client.
     steam_client.cli_login()
 
-    for key in keys:
+    for name, key in keys:
         # Print current key.
-        print("Key:", key)
+        print("Name:", name, "Key:", key)
 
         # Try to redeem key.
         eresult, result_details, receipt_info = steam_client.register_product_key(key)
@@ -44,6 +49,7 @@ def redeem(keys):
         if not has_already and eresult != steam.client.EResult.OK:
             # Raise exception.
             print("Code redeem failed!", eresult, result_details, receipt_info)
+            continue
             #raise Exception("Code redeem failed!", eresult, result_details, receipt_info)
 
 
