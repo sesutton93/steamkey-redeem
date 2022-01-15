@@ -7,7 +7,7 @@ STEAM_MAX_ALLOWED_REDEMPTIONS = 50
 STEAM_COOLDOWN_MINUTES = 60
 STEAM_INCORRECT_REDEMPTION_PENALTY = 2
 
-def read_keys(fn='keys.txt'):
+def read_keys(fn='keys.txt'): #TODO Allow reading of files from an keys_to_read folder i.e. an email
     keys = []
     with open(fn, 'r') as f:
         lines = f.readlines()
@@ -15,10 +15,9 @@ def read_keys(fn='keys.txt'):
     for i, line in enumerate(lines):
         check = get_key(line)
         if check:
-            name = lines[i-1]
-            key = line.split(' ')[2]
+            key = line.split(' ')[2] #TODO Iterate splits for key i.e. search entire line for pattern (ensure multiple keys per line are read)
             keys.append(key)
-            print(name, key)
+            print(key)
     return keys
 
 def get_key(line):
@@ -68,6 +67,7 @@ def redeem(keys):
 
         # Key was redeemed.
         else:
+            #TODO: Add to a local list of redeemed codes to be excluded from future runs
             print("\tRedeemed!")
 
     # Logout from Steam.
