@@ -9,7 +9,7 @@ Linux/Unix
 5. login and enter steam email key
 6. congrats all your keys should be redeemed!
 
-Windows
+Windows - venv
  
  1. add keys from email into keys.txt 
  2. Install python3.9 from microsoft store (if you don't have it already)
@@ -20,3 +20,16 @@ Windows
  7. should read all keys in back to you
  8. login and enter steam email key
  9. congrats all your keys should be redeemed!
+
+Windows - without venv
+ 
+ 1. add keys from email into keys.txt 
+ 2. Install python3.9 from microsoft store (if you don't have it already)
+ 3. ~~(powershell) python -m venv~~
+ 4. ~~(powershell) 'venv/bin/Activate.ps1'~~
+ 5. python -m pip install -r requirements.txt
+ 6. python -m pip install steam google
+ 7. within the venv, run 'python steamkey-redeem.py'
+ 8. should read all keys in back to you
+ 9. login and enter steam email key
+ 10. congrats all your keys should be redeemed!
